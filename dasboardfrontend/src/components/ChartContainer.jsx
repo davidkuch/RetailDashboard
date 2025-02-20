@@ -1,5 +1,4 @@
 import React from "react";
-import { Bar } from "react-chartjs-2"; // Import the Bar chart from react-chartjs-2
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +8,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"; // Import necessary Chart.js modules
-import SetupData from "../ChartDisplayCalculationUtils/SalesOverTime";
 import DisplayTypes from "../consts/DisplayTypes";
+import TotalSalesPerMonthDisplay from "./TotalSalesPerMonthDisplay";
+
 
 // Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -46,41 +46,24 @@ let displayContent;
 
 switch (displayType) {
     case DisplayTypes.TotalSalesPerMonth:
-        displayContent = getTotalSalesPerMonthDisplay(data);
+        displayContent = <TotalSalesPerMonthDisplay data={data}/>;
+        break;
+    case DisplayTypes.SaleByProductCategory:
+        displayContent = getSaleByProductCategoryDisplay(data);
 }
   
 
   return (
     <div className="content">
       <h2>Chart Display</h2>
-    {displayContent}
+   {displayContent}
     </div>
   );
 }
 
-function getTotalSalesPerMonthDisplay(data)
+
+
+function  getSaleByProductCategoryDisplay(data)
 {
-      // Prepare the data for the chart
-  const chartData = SetupData(data);
 
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: "Total Number of Sales per month", // Chart title
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-      },
-    },
-    scales: {
-      x: {
-        beginAtZero: true,
-      },
-    },
-  };
-
-  return   (<Bar data={chartData} options={chartOptions} />);
 }
