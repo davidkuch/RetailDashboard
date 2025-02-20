@@ -1,5 +1,12 @@
-export default function  ControlPanel(){
+import React, { useState } from "react";
+
+
+export default function  ControlPanel({ fetchData }){
+  
+    
     return (
-        <div className="sidebar">would be side bar!!</div>
+        <div className="sidebar">
+            <button onClick={fetchData}>Fetch Data</button>
+        </div>
     )
 }

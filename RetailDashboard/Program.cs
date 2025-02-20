@@ -3,6 +3,17 @@ using RetailDashboard.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", builder =>
+    {
+        builder
+            .WithOrigins("http://localhost:57219") // React app URL
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -17,6 +28,9 @@ builder.Services.AddDbContext<RetailDashboardContext>(options =>
 builder.Services.AddScoped<ISalesRepository, SalesRepository>();
 
 var app = builder.Build();
+
+// Use CORS policy
+app.UseCors("AllowReactApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
