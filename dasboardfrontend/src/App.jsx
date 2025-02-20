@@ -4,9 +4,11 @@ import axios from "axios";
 import './App.css'
 import ControlPanel from './components/ControlPanel'
 import ChartContainer from './components/ChartContainer'
+import DisplayTypes from './consts/DisplayTypes';
 
 function App() {
   const [data, setData] = useState(null);
+  const [displayType, setDisplayType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -25,8 +27,8 @@ function App() {
 
   return (
     <div className='container'>    
-        <ControlPanel fetchData={fetchData}/>  
-        <ChartContainer data={data} loading={loading} error={error}/>
+        <ControlPanel fetchData={fetchData} setDisplayType={setDisplayType}/>  
+        <ChartContainer displayType={displayType} data={data} loading={loading} error={error}/>
     </div>
   )
 }

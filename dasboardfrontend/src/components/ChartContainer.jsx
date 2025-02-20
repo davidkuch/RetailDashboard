@@ -10,27 +10,57 @@ import {
   Legend,
 } from "chart.js"; // Import necessary Chart.js modules
 import SetupData from "../ChartDisplayCalculationUtils/SalesOverTime";
+import DisplayTypes from "../consts/DisplayTypes";
 
 // Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function ChartContainer({ data, loading, error })
+export default function ChartContainer({ displayType, data, loading, error })
 {
       // Handle loading and error states
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  
-  if (error) {
-    return <p style={{ color: "red" }}>Error: {error}</p>;
+    if (error) {
+        return <p style={{ color: "red" }}>Error: {error}</p>;
+    }
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (!data) {
+    return <p>Please Fetch data</p>;
   }
 
-  // Handle case when no data is available
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <p>No data available</p>;
   }
+
+  if (!displayType)
+  {
+    return <p>Please select Display Type</p>;
+  }
+
+  
 debugger;
-    // Prepare the data for the chart
+
+let displayContent;
+
+switch (displayType) {
+    case DisplayTypes.TotalSalesPerMonth:
+        displayContent = getTotalSalesPerMonthDisplay(data);
+}
+  
+
+  return (
+    <div className="content">
+      <h2>Chart Display</h2>
+    {displayContent}
+    </div>
+  );
+}
+
+function getTotalSalesPerMonthDisplay(data)
+{
+      // Prepare the data for the chart
   const chartData = SetupData(data);
 
   const chartOptions = {
@@ -38,7 +68,7 @@ debugger;
     plugins: {
       title: {
         display: true,
-        text: "Data Chart", // Chart title
+        text: "Total Number of Sales per month", // Chart title
       },
       tooltip: {
         mode: "index",
@@ -52,10 +82,5 @@ debugger;
     },
   };
 
-  return (
-    <div className="content">
-      <h2>Chart Display</h2>
-      <Bar data={chartData} options={chartOptions} />
-    </div>
-  );
+  return   (<Bar data={chartData} options={chartOptions} />);
 }

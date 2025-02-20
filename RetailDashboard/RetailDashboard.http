@@ -27,7 +27,36 @@ Content-Type: application/json
   "quantity": 13,
   "unitPrice": 22.5,
   "totalPrice": 203.0,
-  "saleDate": "2025-02-20T00:00:00"
+  "saleDate": "2025-08-20T00:00:00"
 }
 
 ###
+
+POST {{RetailDashboard_HostAddress}}/Sales
+Content-Type: application/json
+
+{
+  "productName": "Product xs",
+  "category": "Category z",
+  "quantity": 13,
+  "unitPrice": 22.5,
+  "totalPrice": 203.0,
+  "saleDate": "2025-04-20T00:00:00"
+}
+
+###
+POST {{RetailDashboard_HostAddress}}/Sales
+Content-Type: application/json
+
+{
+  "productName": "Product b",
+  "category": "Category b",
+  "quantity": 13,
+  "unitPrice": 22.5,
+  "totalPrice": 203.0,
+  "saleDate": "2025-03-20T00:00:00"
+}
+
+###
+
+
