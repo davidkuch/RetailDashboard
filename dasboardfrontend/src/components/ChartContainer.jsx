@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"; // Import necessary Chart.js modules
+import SetupData from "../ChartDisplayCalculationUtils/SalesOverTime";
 
 // Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -30,18 +31,7 @@ export default function ChartContainer({ data, loading, error })
   }
 debugger;
     // Prepare the data for the chart
-  const chartData = {
-    labels: data.map((item) => item.SaleDate), 
-    datasets: [
-      {
-        label: "Sales Data", // You can change the label to reflect your data
-        data: data.map((item) => item.SaleDate), // Assuming each item has a 'value' key to plot
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+  const chartData = SetupData(data);
 
   const chartOptions = {
     responsive: true,
