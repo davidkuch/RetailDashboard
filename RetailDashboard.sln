@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailDashboard", "RetailDashboard\RetailDashboard.csproj", "{887B46BC-140F-4408-9CAC-020FFE2243D1}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dashboardfrontend", "DasboardFrontEnd\dashboardfrontend.esproj", "{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{887B46BC-140F-4408-9CAC-020FFE2243D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{887B46BC-140F-4408-9CAC-020FFE2243D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{887B46BC-140F-4408-9CAC-020FFE2243D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E9C07D-A2FC-CD42-AB97-0CFE634F3051}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
