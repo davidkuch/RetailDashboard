@@ -1,6 +1,33 @@
-@RetailDashboard_HostAddress = http://localhost:5057
+@RetailDashboard_HostAddress = http://localhost:5000
 
-GET {{RetailDashboard_HostAddress}}/weatherforecast/
+GET {{RetailDashboard_HostAddress}}/Sales
 Accept: application/json
+###
+
+POST {{RetailDashboard_HostAddress}}/Sales
+Content-Type: application/json
+
+{
+  "productName": "Product A",
+  "category": "Category A",
+  "quantity": 10,
+  "unitPrice": 20.5,
+  "totalPrice": 205.0,
+  "saleDate": "2025-02-20T00:00:00"
+}
+
+###
+
+POST {{RetailDashboard_HostAddress}}/Sales
+Content-Type: application/json
+
+{
+  "productName": "Product b",
+  "category": "Category b",
+  "quantity": 13,
+  "unitPrice": 22.5,
+  "totalPrice": 203.0,
+  "saleDate": "2025-02-20T00:00:00"
+}
 
 ###
