@@ -22,7 +22,11 @@ export default function TotalSalesPerMonthDisplay({data})
     scales: {
       x: {
         beginAtZero: true,
+        stacked : true
       },
+      y: {
+        stacked: true
+      }
     },
   };
 

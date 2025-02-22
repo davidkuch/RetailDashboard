@@ -2,27 +2,35 @@ import dayjs from "dayjs";
 
 export default function SetupData(data)
 {
-    const fromDate = dayjs("2025-01-01");
-    const toDate =  dayjs("2026-01-01");
+  // temp: use hardcoded months of one year.
+  const fromDate = dayjs("2025-01-01");
+  const toDate = dayjs("2026-01-01");
+  const monthsListLabels = getMonthList(fromDate, toDate);
 
-    const monthsListLabels = getMonthList(fromDate, toDate);
+  const groupedByCategory = groupSalesByCategory(data);
 
-    const salesCountByMonth = getSalesCountByMonth(monthsListLabels,data);
+  var chartData = {
+    labels: monthsListLabels,
+    datasets: []
+  };
 
-    const chartData = {
-        labels: monthsListLabels, 
-        datasets: [
-          {
-            label: "Sales Data", 
-            data:  salesCountByMonth, 
-            backgroundColor: "rgba(75, 192, 192, 0.2)",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-          },
-        ],
-      };
+  const colors = ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "Black",  "Gray"];
+  var colorCounter = 0;
 
-return chartData;
+  Object.entries(groupedByCategory).forEach(([category, sales]) => {
+      const salesCountByMonth = getSalesCountByMonth(monthsListLabels, sales);
+      chartData.datasets.push({
+        label: category,
+        data: salesCountByMonth,
+        backgroundColor: colors[colorCounter],
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      });
+      colorCounter++;
+    }
+  );
+
+  return chartData;
 
 }
 
@@ -46,6 +54,16 @@ function getMonthList(startDate, endDate) {
     return months;
   }
 
+  function groupSalesByCategory(sales) {
+    return sales.reduce((acc, sale) => {
+      if (!acc[sale.category]) {
+        acc[sale.category] = [];
+      }
+      acc[sale.category].push(sale);
+      return acc;
+    }, {});
+  }
+  
   function getSalesCountByMonth(monthsList, data) {
     return monthsList.map(month => {
     // Filter sales for the current month and count them
@@ -53,5 +71,7 @@ function getMonthList(startDate, endDate) {
     return salesInMonth.length;
   });
 }
+
+
 
   
