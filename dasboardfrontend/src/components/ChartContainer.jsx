@@ -10,6 +10,7 @@ import {
 } from "chart.js"; // Import necessary Chart.js modules
 import DisplayTypes from "../consts/DisplayTypes";
 import TotalSalesPerMonthDisplay from "./TotalSalesPerMonthDisplay";
+import SalesByCategory from "./SalesByCategory";
 
 
 // Register the components used in the chart
@@ -53,7 +54,8 @@ export default function ChartContainer({ displayType, data, loading, error, filt
       displayContent = <TotalSalesPerMonthDisplay data={dataToDisplay} />;
       break;
     case DisplayTypes.SaleByProductCategory:
-      displayContent = getSaleByProductCategoryDisplay(dataToDisplay);
+      displayContent = <SalesByCategory data={dataToDisplay} />;
+      break;
   }
 
 
@@ -71,9 +73,4 @@ function ApplyFilters(sales, filter) {
     const saleDate = new Date(sale.saleDate); // Convert SaleDate to Date object
     return saleDate >= new Date(fromDate) && saleDate <= new Date(toDate);
   });
-}
-
-function  getSaleByProductCategoryDisplay(data)
-{
-
 }
