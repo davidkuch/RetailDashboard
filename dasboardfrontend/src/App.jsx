@@ -11,6 +11,7 @@ function App() {
   const [displayType, setDisplayType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [filters, setFilters] = useState(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -27,8 +28,8 @@ function App() {
 
   return (
     <div className='container'>    
-        <ControlPanel fetchData={fetchData} setDisplayType={setDisplayType}/>  
-        <ChartContainer displayType={displayType} data={data} loading={loading} error={error}/>
+        <ControlPanel fetchData={fetchData} setDisplayType={setDisplayType} setFilters={setFilters}/>  
+        <ChartContainer displayType={displayType} data={data} loading={loading} error={error} filters={filters}/>
     </div>
   )
 }

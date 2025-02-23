@@ -15,18 +15,17 @@ import TotalSalesPerMonthDisplay from "./TotalSalesPerMonthDisplay";
 // Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function ChartContainer({ displayType, data, loading, error })
-{
-      // Handle loading and error states
-    if (error) {
-        return <p style={{ color: "red" }}>Error: {error}</p>;
-    }
+export default function ChartContainer({ displayType, data, loading, error, filters }) {
+  // Handle loading and error states
+  if (error) {
+    return <p style={{ color: "red" }}>Error: {error}</p>;
+  }
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-    if (!data) {
+  if (!data) {
     return <p>Please Fetch data</p>;
   }
 
@@ -34,34 +33,45 @@ export default function ChartContainer({ displayType, data, loading, error })
     return <p>No data available</p>;
   }
 
-  if (!displayType)
-  {
+  if (!displayType) {
     return <p>Please select Display Type</p>;
   }
 
-  
-debugger;
+  let dataToDisplay = data;
 
-let displayContent;
+  if (filters) {
+    dataToDisplay = ApplyFilters(data, filters);
+  }
+  else {
+    dataToDisplay = data;
+  }
 
-switch (displayType) {
+  let displayContent;
+
+  switch (displayType) {
     case DisplayTypes.TotalSalesPerMonth:
-        displayContent = <TotalSalesPerMonthDisplay data={data}/>;
-        break;
+      displayContent = <TotalSalesPerMonthDisplay data={dataToDisplay} />;
+      break;
     case DisplayTypes.SaleByProductCategory:
-        displayContent = getSaleByProductCategoryDisplay(data);
-}
-  
+      displayContent = getSaleByProductCategoryDisplay(dataToDisplay);
+  }
+
 
   return (
     <div className="content">
       <h2>Chart Display</h2>
-   {displayContent}
+      {displayContent}
     </div>
   );
 }
 
-
+function ApplyFilters(sales, filter) {
+  const { fromDate, toDate } = filter;
+  return sales.filter(sale => {
+    const saleDate = new Date(sale.saleDate); // Convert SaleDate to Date object
+    return saleDate >= new Date(fromDate) && saleDate <= new Date(toDate);
+  });
+}
 
 function  getSaleByProductCategoryDisplay(data)
 {

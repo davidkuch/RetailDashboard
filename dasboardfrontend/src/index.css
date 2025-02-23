@@ -17,7 +17,7 @@
   align-items: stretch; /* Ensure buttons stretch to the same width */
 }
 
-.sidebar button {
+.sidebar-button {
   width: 100%; /* Make buttons take the full width of the container */
   margin: 5px 0; /* Add space between buttons (optional) */
   padding: 10px;
@@ -40,4 +40,28 @@
   height: auto; /* Allow the content to adjust its height */
   width: calc(100% - 250px - 20px); /* Full width minus sidebar width and total margin (20px on both sides) */
   min-width: 400px;
+}
+
+.filter-form {
+  width : 250px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.filter-form label {
+  flex-shrink: 0; /* Prevents label from shrinking */
+  margin-right: 10px;
+  white-space: nowrap; /* Prevents label from wrapping */
+  padding-top: 5px;
+}
+
+.filter-form input {
+  flex-grow: 1; /* Makes input take available space */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
