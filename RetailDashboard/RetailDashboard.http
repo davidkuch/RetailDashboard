@@ -3,7 +3,9 @@
 GET {{RetailDashboard_HostAddress}}/Sales
 Accept: application/json
 ###
-
+GET {{RetailDashboard_HostAddress}}/Sales/10
+Accept: application/json
+###
 POST {{RetailDashboard_HostAddress}}/Sales
 Content-Type: application/json
 
@@ -37,11 +39,11 @@ Content-Type: application/json
 
 {
   "productName": "Product xs",
-  "category": "Category z",
+  "category": "Category bgg",
   "quantity": 13,
   "unitPrice": 22.5,
   "totalPrice": 203.0,
-  "saleDate": "2025-04-20T00:00:00"
+  "saleDate": "2025-09-20T00:00:00"
 }
 
 ###
@@ -49,12 +51,12 @@ POST {{RetailDashboard_HostAddress}}/Sales
 Content-Type: application/json
 
 {
-  "productName": "Product b",
+  "productName": "Product fff",
   "category": "Category b",
   "quantity": 13,
   "unitPrice": 22.5,
   "totalPrice": 203.0,
-  "saleDate": "2025-03-20T00:00:00"
+  "saleDate": "2025-06-20T00:00:00"
 }
 
 ###

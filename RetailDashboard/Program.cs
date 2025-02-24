@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RetailDashboard.DataAccess;
+using RetailDashboard.FirstKAlgorithm;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +28,18 @@ builder.Services.AddDbContext<RetailDashboardContext>(options =>
 // Register repository
 builder.Services.AddScoped<ISalesRepository, SalesRepository>();
 
+// Register algorithm
+builder.Services.AddScoped<IFirstKAlgorithm, MinHeapImp>();
+
 var app = builder.Build();
 
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<RetailDashboardContext>();
+    DataSeeder.Seed(context);
+}
 // Use CORS policy
 app.UseCors("AllowReactApp");
 
