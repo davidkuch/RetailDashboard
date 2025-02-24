@@ -10,12 +10,12 @@ POST {{RetailDashboard_HostAddress}}/Sales
 Content-Type: application/json
 
 {
-  "productName": "Product A",
+  "productName": "Product Adaca",
   "category": "Category A",
   "quantity": 10,
   "unitPrice": 20.5,
   "totalPrice": 205.0,
-  "saleDate": "2025-02-20T00:00:00"
+  "saleDate": "2025-09-20T00:00:00"
 }
 
 ###
