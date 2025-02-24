@@ -1,3 +1,4 @@
+import React from "react";
 import { Bar } from "react-chartjs-2"; // Import the Bar chart from react-chartjs-2
 
 import SetupData from "../ChartDisplayCalculationUtils/SalesOverTime";

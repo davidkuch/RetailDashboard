@@ -30,7 +30,7 @@ export default function ChartContainer({ displayType, data, leaderData, loading,
   if (!data) {
     return <p>Please Fetch data</p>;
   }
-
+debugger;
   if (data.length === 0) {
     return <p>No data available</p>;
   }
@@ -42,10 +42,14 @@ export default function ChartContainer({ displayType, data, leaderData, loading,
   let dataToDisplay = data;
 
   if (filters) {
-    dataToDisplay = ApplyFilters(data, filters);
+    dataToDisplay = ApplyFilters(data, filters);   
   }
   else {
     dataToDisplay = data;
+  }
+
+  if (dataToDisplay.length === 0) {
+    return <p>No data available after filtering</p>;
   }
 
   let displayContent;

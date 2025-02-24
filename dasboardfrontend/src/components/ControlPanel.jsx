@@ -1,3 +1,5 @@
+import React from "react";
+
 import DisplayTypes from "../consts/DisplayTypes";
 import FilterForm from "./FilterForm";
 

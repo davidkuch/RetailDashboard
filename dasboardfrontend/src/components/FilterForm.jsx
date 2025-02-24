@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
 
 const FilterForm = ({onApplyFilters }) => {
   const [tempFilters, setTempFilters] = useState({
@@ -10,7 +9,11 @@ const FilterForm = ({onApplyFilters }) => {
   });
 
   const handleApplyFilters = () => {
-    onApplyFilters(tempFilters);
+    if (tempFilters.fromDate && tempFilters.toDate)
+    {
+      onApplyFilters(tempFilters);
+    }
+  
   };
 
   return (
