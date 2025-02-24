@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useEffect } from 'react';
 import axios from "axios";
 
 import './App.css'
@@ -14,44 +15,37 @@ function App() {
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState(null);
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-
-      let url;
-      switch (displayType) {
-        case DisplayTypes.SaleByProductCategory:
-        case DisplayTypes.TotalSalesPerMonth:
-          url = "https://localhost:5001/Sales";
-          break;
-        case DisplayTypes.LeadersBoard:
-          url = "https://localhost:5001/Sales/5";
-
-      }
-
-      const response = await axios.get(url);
-      switch (displayType) {
-        case DisplayTypes.SaleByProductCategory:
-        case DisplayTypes.TotalSalesPerMonth:
+    useEffect(() => {
+      axios
+        .get("https://localhost:5001/Sales") 
+        .then((response) => {
           setData(response.data);
-          break;
-        case DisplayTypes.LeadersBoard:
-          setLeaderData(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching sales data:", error);
+          setError("Failed to load sales data");
+          setLoading(false);
+        });
+    }, []); // Runs only once on component mount
 
-      }
-      
-    } catch (err) {
-      setError(err.message); // if the request fails
-    } finally {
-      setLoading(false); // End loading
-    }
-  };
+    useEffect(() => {
+      axios
+        .get("https://localhost:5001/Sales/5") 
+        .then((response) => {
+          setLeaderData(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching leader data:", error);
+          setError("Failed to load leader data");
+          setLoading(false);
+        });
+    }, []); // Runs only once on component mount
 
   return (
     <div className='container'>    
-        <ControlPanel fetchData={fetchData} setDisplayType={setDisplayType} setFilters={setFilters}/>  
+        <ControlPanel setDisplayType={setDisplayType} setFilters={setFilters}/>  
         <ChartContainer displayType={displayType} data={data} leaderData={leaderData} loading={loading} error={error} filters={filters}/>
     </div>
   )
