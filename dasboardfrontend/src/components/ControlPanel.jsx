@@ -9,6 +9,7 @@ export default function  ControlPanel({ fetchData, setDisplayType, setFilters })
             <button className="sidebar-button" onClick={fetchData}>Fetch Data</button>
             <button className="sidebar-button" onClick={() => setDisplayType(DisplayTypes.TotalSalesPerMonth)}>Total Number of Sales per month</button>
             <button className="sidebar-button" onClick={() => setDisplayType(DisplayTypes.SaleByProductCategory)}>Sales by Product Category</button>
+            <button className="sidebar-button" onClick={() => setDisplayType(DisplayTypes.LeadersBoard)}>Leaders Board</button>
             <FilterForm onApplyFilters = {setFilters}/>
         </div>
     )

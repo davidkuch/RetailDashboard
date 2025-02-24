@@ -8,6 +8,7 @@ import DisplayTypes from './consts/DisplayTypes';
 
 function App() {
   const [data, setData] = useState(null);
+  const [leaderData, setLeaderData] = useState(null);
   const [displayType, setDisplayType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,11 +17,33 @@ function App() {
   const fetchData = async () => {
     setLoading(true);
     setError(null);
+
     try {
-      const response = await axios.get("https://localhost:5001/Sales");
-      setData(response.data); // Set the fetched data from response
+
+      let url;
+      switch (displayType) {
+        case DisplayTypes.SaleByProductCategory:
+        case DisplayTypes.TotalSalesPerMonth:
+          url = "https://localhost:5001/Sales";
+          break;
+        case DisplayTypes.LeadersBoard:
+          url = "https://localhost:5001/Sales/5";
+
+      }
+
+      const response = await axios.get(url);
+      switch (displayType) {
+        case DisplayTypes.SaleByProductCategory:
+        case DisplayTypes.TotalSalesPerMonth:
+          setData(response.data);
+          break;
+        case DisplayTypes.LeadersBoard:
+          setLeaderData(response.data);
+
+      }
+      
     } catch (err) {
-      setError(err.message); // Set error if the request fails
+      setError(err.message); // if the request fails
     } finally {
       setLoading(false); // End loading
     }
@@ -29,7 +52,7 @@ function App() {
   return (
     <div className='container'>    
         <ControlPanel fetchData={fetchData} setDisplayType={setDisplayType} setFilters={setFilters}/>  
-        <ChartContainer displayType={displayType} data={data} loading={loading} error={error} filters={filters}/>
+        <ChartContainer displayType={displayType} data={data} leaderData={leaderData} loading={loading} error={error} filters={filters}/>
     </div>
   )
 }

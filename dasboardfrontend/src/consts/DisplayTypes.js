@@ -1,6 +1,7 @@
 const DisplayTypes = {
     TotalSalesPerMonth: "TotalSalesPerMonth",
-    SaleByProductCategory: "SaleByProductCategory"
+    SaleByProductCategory: "SaleByProductCategory",
+    LeadersBoard : "LeadersBoard"
 };
 
 export default DisplayTypes;

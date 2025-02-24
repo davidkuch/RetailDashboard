@@ -11,12 +11,13 @@ import {
 import DisplayTypes from "../consts/DisplayTypes";
 import TotalSalesPerMonthDisplay from "./TotalSalesPerMonthDisplay";
 import SalesByCategory from "./SalesByCategory";
+import LeadersBoard from "./LeadersBoard";
 
 
 // Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function ChartContainer({ displayType, data, loading, error, filters }) {
+export default function ChartContainer({ displayType, data, leaderData, loading, error, filters }) {
   // Handle loading and error states
   if (error) {
     return <p style={{ color: "red" }}>Error: {error}</p>;
@@ -55,6 +56,9 @@ export default function ChartContainer({ displayType, data, loading, error, filt
       break;
     case DisplayTypes.SaleByProductCategory:
       displayContent = <SalesByCategory data={dataToDisplay} />;
+      break;
+    case DisplayTypes.LeadersBoard:
+      displayContent = <LeadersBoard data={leaderData} />;
       break;
   }
 
