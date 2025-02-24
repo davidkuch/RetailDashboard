@@ -37,7 +37,11 @@ const LeadersBoard = ({ data }) => {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
+      },
+      title: {
+        display: true,
+        text: "5 Top by Total Price across sales", // Chart title
       },
     },
   };
