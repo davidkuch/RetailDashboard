@@ -1,5 +1,4 @@
 export default function SetupData(data) {
-    debugger;
     let groupedSales = groupSalesByCategory(data);
 
     let categories =  Object.keys(groupedSales);;

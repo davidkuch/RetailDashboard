@@ -15,9 +15,10 @@ function App() {
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState(null);
 
+  // Runs only once on component mount
     useEffect(() => {
       axios
-        .get("https://localhost:5001/Sales") 
+        .get("https://localhost:5001/Sales") // TODO: extract to config
         .then((response) => {
           setData(response.data);
           setLoading(false);
@@ -27,11 +28,11 @@ function App() {
           setError("Failed to load sales data");
           setLoading(false);
         });
-    }, []); // Runs only once on component mount
+    }, []); 
 
     useEffect(() => {
       axios
-        .get("https://localhost:5001/Sales/5") 
+        .get("https://localhost:5001/Sales/5") // TODO: extract to config
         .then((response) => {
           setLeaderData(response.data);
           setLoading(false);
@@ -41,7 +42,7 @@ function App() {
           setError("Failed to load leader data");
           setLoading(false);
         });
-    }, []); // Runs only once on component mount
+    }, []);
 
   return (
     <div className='container'>    

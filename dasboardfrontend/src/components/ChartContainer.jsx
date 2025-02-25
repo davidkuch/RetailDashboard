@@ -7,14 +7,12 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js"; // Import necessary Chart.js modules
+} from "chart.js"; 
 import DisplayTypes from "../consts/DisplayTypes";
 import TotalSalesPerMonthDisplay from "./TotalSalesPerMonthDisplay";
 import SalesByCategory from "./SalesByCategory";
 import LeadersBoard from "./LeadersBoard";
 
-
-// Register the components used in the chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function ChartContainer({ displayType, data, leaderData, loading, error, filters }) {
@@ -30,7 +28,7 @@ export default function ChartContainer({ displayType, data, leaderData, loading,
   if (!data) {
     return <p>Please Fetch data</p>;
   }
-debugger;
+
   if (data.length === 0) {
     return <p>No data available</p>;
   }
