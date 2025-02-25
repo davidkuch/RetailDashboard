@@ -1,8 +1,4 @@
-﻿Here’s your improved README with typos fixed and minor enhancements for clarity and flow:  
-
----
-
-# Retail Dashboard  
+﻿# Retail Dashboard  
 
 ## Motivation  
 This application serves as a dashboard for **visualizing sales over time**, filtering by category, and providing valuable insights to the business team.  
@@ -37,13 +33,17 @@ The first two visualizations support filtering by **time range** and **product c
 ## Future Improvements & Current Limitations  
 - The **backend does not currently support filtering** by time range and product category; these filters are applied on the frontend.  
 - The **Leaderboard display** does not yet allow users to **adjust the number of top products** displayed.  
-
+- Ports and Urls are hardcoded in the frontend and backend - need to extract to config or secret.
 ## Setup  
 
 ### Backend  
 1. Open **Visual Studio**.  
 2. Build the `RetailDashboard.sln` solution.  
-3. Start the **Retail Dashboard** project.  
+3. Apply database migrations:  
+   ```sh
+   dotnet ef database update
+   ```  
+4. Start the **Retail Dashboard** project.  
 
 ### Frontend  
 1. Navigate to the frontend directory:  
