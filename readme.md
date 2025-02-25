@@ -60,5 +60,5 @@ The first two visualizations support filtering by **time range** and **product c
    ```  
 4. Start the frontend:  
    ```sh
-   npm start
+   npm start dev
    ```  
