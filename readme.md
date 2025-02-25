@@ -1,5 +1,9 @@
 ﻿# Retail Dashboard  
 
+## motivaiton
+This application will serve as a dashboard for visualising sales over time, filtering by category, and providing insights to the business team.
+
+
 ## Overview  
 This project consists of three components:  
 1. **Retail Dashboard .NET Backend**  
@@ -30,10 +34,6 @@ The first two visualizations support filtering by **time range** and **product c
 ## Future Improvements & Current Limitations  
 - The **backend does not currently support filtering** by time range and product category; these filters are applied on the frontend.  
 - The **Leaderboard display** does not currently allow users to **change the number of top products** displayed.  
-
-Here’s an improved version with better clarity and structure:  
-
----
 
 ## Setup  
 
