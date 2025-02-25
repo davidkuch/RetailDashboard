@@ -1,27 +1,59 @@
-   using Microsoft.EntityFrameworkCore;
-   using RetailDashboard.models;
+using Microsoft.EntityFrameworkCore;
+using RetailDashboard.models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-   namespace RetailDashboard.DataAccess
-   {
-       public static class DataSeeder
-       {
-           public static void Seed(RetailDashboardContext context)
-           {
-               if (!context.Sales.Any())
-               {
-                   var salesData = new List<Sales>
-                   {
-                       new Sales { ProductName = "Product A", Category = "Category A", Quantity = 10, UnitPrice = 20.5f, TotalPrice = 205.0f, SaleDate = new DateTime(2025, 2, 20) },
-                       new Sales { ProductName = "Product B", Category = "Category B", Quantity = 13, UnitPrice = 22.5f, TotalPrice = 292.5f, SaleDate = new DateTime(2025, 8, 20) },
-                       new Sales { ProductName = "Product XS", Category = "Category BGG", Quantity = 13, UnitPrice = 22.5f, TotalPrice = 292.5f, SaleDate = new DateTime(2025, 9, 20) },
-                       new Sales { ProductName = "Product FFF", Category = "Category B", Quantity = 13, UnitPrice = 22.5f, TotalPrice = 292.5f, SaleDate = new DateTime(2025, 6, 20) },
-                       // Add more data as needed
-                   };
+namespace RetailDashboard.DataAccess
+{
+    public static class DataSeeder
+    {
+        private static readonly Random _random = new Random();
+        private static readonly string[] Categories = { "Electronics", "Clothing", "Home Appliances", "Books", "Toys" };
+        private static readonly Dictionary<string, string[]> ProductNames = new()
+        {
+            { "Electronics", new[] { "Laptop", "Smartphone", "Tablet" } },
+            { "Clothing", new[] { "T-Shirt", "Jeans", "Jacket" } },
+            { "Home Appliances", new[] { "Microwave", "Blender", "Vacuum Cleaner" } },
+            { "Books", new[] { "Fiction", "Non-Fiction", "Comics" } },
+            { "Toys", new[] { "Lego", "Action Figure", "Doll" } }
+        };
 
-                   context.Sales.AddRange(salesData);
-                   context.SaveChanges();
-               }
-           }
-       }
-   }
-   
+        public static void Seed(RetailDashboardContext context, int numSales = 250)
+        {
+            if (!context.Sales.Any())
+            {
+                var salesData = GenerateRandomSales(numSales);
+                context.Sales.AddRange(salesData);
+                context.SaveChanges();
+            }
+        }
+
+        private static List<Sales> GenerateRandomSales(int count)
+        {
+            var salesList = new List<Sales>();
+
+            for (int i = 0; i < count; i++)
+            {
+                string category = Categories[_random.Next(Categories.Length)];
+                string productName = ProductNames[category][_random.Next(ProductNames[category].Length)];
+                int quantity = _random.Next(1, 21);
+                float unitPrice = (float)Math.Round(_random.NextDouble() * (500 - 10) + 10, 2);
+                float totalPrice = (float)Math.Round(quantity * unitPrice, 2);
+                DateTime saleDate = DateTime.Today.AddDays(-_random.Next(1, 365));
+
+                salesList.Add(new Sales
+                {
+                    ProductName = productName,
+                    Category = category,
+                    Quantity = quantity,
+                    UnitPrice = unitPrice,
+                    TotalPrice = totalPrice,
+                    SaleDate = saleDate
+                });
+            }
+
+            return salesList;
+        }
+    }
+}
